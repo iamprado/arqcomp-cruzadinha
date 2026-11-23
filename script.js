@@ -901,6 +901,16 @@ const UI = (() => {
 
   /* ---------- Tela inicial ---------- */
   function iniciar() {
+    // O clique em START (ou o Enter) conta como interação do usuário,
+    // então o navegador permite ligar a música e os efeitos aqui.
+    if (!Som.musica) {
+      const on = Som.alternarMusica();
+      rotulo("btn-musica", "♪", `Música: ${on ? "ON" : "OFF"}`, on);
+    }
+    if (!Som.efeitos) {
+      const on = Som.alternarEfeitos();
+      rotulo("btn-sons", on ? "🔊" : "🔇", `Sons: ${on ? "ON" : "OFF"}`, on);
+    }
     document.getElementById("inicio").hidden = true;
     document.getElementById("jogo").hidden = false;
     Jogo.mensagem(Estado.xp > 0
