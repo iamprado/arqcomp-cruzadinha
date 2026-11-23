@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Desktop Pixel — jogo de estudos com flashcards e cruzadinha de Arquitetura Computacional.">
+  <title>Desktop Pixel — Study &amp; Play</title>
+  <link rel="icon" type="image/svg+xml" href="assets/images/icon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ===== Tela inicial ===== -->
+  <div id="inicio" class="inicio">
+    <div class="inicio-ceu" aria-hidden="true"></div>
+    <div class="inicio-caixa">
+      <p class="inicio-sobre">ARQUITETURA COMPUTACIONAL</p>
+      <h1 class="inicio-titulo">DESKTOP<br>PIXEL</h1>
+      <p class="inicio-sub">Study &amp; Play</p>
+      <p class="inicio-texto">Um quartinho aconchegante, um computador ligado e um gatinho dormindo.
+        Estude com <b>flashcards</b> e resolva a <b>cruzadinha</b> para restaurar o sistema.</p>
+      <p id="inicio-save" class="inicio-save" hidden></p>
+      <div class="inicio-botoes">
+        <button id="btn-start" class="btn-start" type="button">START</button>
+        <button id="btn-novo" class="btn-pixel secundario" type="button" hidden>Novo jogo</button>
+      </div>
+      <p class="inicio-dica">Pressione <kbd>ENTER</kbd> para começar</p>
+    </div>
+  </div>
+
+  <!-- ===== Jogo ===== -->
+  <div id="jogo" class="jogo" hidden>
+
+    <header class="hud">
+      <div class="logo">
+        <span class="logo-titulo">DESKTOP PIXEL</span>
+        <span class="logo-sub">Study &amp; Play</span>
+      </div>
+      <div class="hud-info">
+        <div class="hud-xp">XP <b id="hud-xp">0</b></div>
+        <div class="hud-prog" title="Palavras da cruzadinha + flashcards acertados">
+          <span>Progresso</span>
+          <div class="barra"><i id="hud-barra"></i></div>
+          <span id="hud-prog">0/32</span>
+        </div>
+        <button id="btn-conquistas" class="btn-pixel pequeno" type="button">🏆 <span id="hud-conq">0/7</span></button>
+      </div>
+    </header>
+
+    <main class="layout">
+
+      <!-- Ambiente virtual -->
+      <section class="quarto" aria-label="Quarto do Desktop Pixel">
+        <div class="quarto-moldura">
+          <canvas id="cena" width="192" height="144" aria-label="Personagem estudando no computador, com um gatinho dormindo na mesa"></canvas>
+          <div id="bolha-personagem" class="bolha" hidden></div>
+          <div id="bolha-gato" class="bolha bolha-gato" hidden></div>
+        </div>
+        <p id="mensagem" class="mensagem">Clique no gatinho ou no personagem. Bons estudos!</p>
+      </section>
+
+      <!-- Monitor com os aplicativos -->
+      <section class="monitor" aria-label="Monitor do computador">
+        <div class="monitor-tela">
+          <nav class="os-barra" aria-label="Aplicativos">
+            <button class="app-aba" data-app="flashcards" type="button">▤ FLASHCARDS</button>
+            <button class="app-aba" data-app="cruzadinha" type="button">▦ CRUZADINHA</button>
+            <span id="relogio" class="relogio">00:00</span>
+          </nav>
+
+          <div class="app-area">
+
+            <!-- ===== App: Flashcards ===== -->
+            <section id="app-flashcards" class="app" hidden>
+              <div class="app-titulo">flashcards.exe <span>Vire o cartão e diga se você sabia</span></div>
+
+              <div class="fc-status">
+                <span>Cartão <b id="fc-pos">1</b>/<b id="fc-total">16</b></span>
+                <span>Acertos <b id="fc-acertos">0</b></span>
+                <span>Respondidos <b id="fc-respondidos">0</b></span>
+              </div>
+              <div id="fc-pontos" class="fc-pontos" aria-label="Progresso dos cartões"></div>
+
+              <div class="fc-palco">
+                <div id="fc-cartao" class="fc-cartao" role="button" tabindex="0" aria-label="Cartão: clique para virar">
+                  <div class="fc-interno">
+                    <div class="fc-face fc-frente">
+                      <span class="fc-tag">PERGUNTA</span>
+                      <span id="fc-selo" class="fc-selo"></span>
+                      <p id="fc-pergunta" class="fc-pergunta"></p>
+                      <small class="fc-dica">clique ou aperte ESPAÇO para virar</small>
+                    </div>
+                    <div class="fc-face fc-verso">
+                      <span class="fc-tag">RESPOSTA</span>
+                      <h3 id="fc-resposta" class="fc-resposta"></h3>
+                      <p id="fc-explicacao" class="fc-explicacao"></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="fc-acoes">
+                <button id="fc-nao" class="btn-pixel erro" type="button" disabled>✗ Não sabia</button>
+                <button id="fc-sim" class="btn-pixel certo" type="button" disabled>✓ Acertei</button>
+              </div>
+              <div class="fc-nav">
+                <button id="fc-ant" class="btn-pixel secundario" type="button">◀ Anterior</button>
+                <button id="fc-recomecar" class="btn-pixel secundario" type="button">↺ Recomeçar baralho</button>
+                <button id="fc-prox" class="btn-pixel secundario" type="button">Próximo ▶</button>
+              </div>
+              <p class="atalhos">Atalhos: <kbd>←</kbd> <kbd>→</kbd> navegar · <kbd>Espaço</kbd> virar · <kbd>1</kbd> não sabia · <kbd>2</kbd> acertei</p>
+            </section>
+
+            <!-- ===== App: Cruzadinha ===== -->
+            <section id="app-cruzadinha" class="app" hidden>
+              <div class="app-titulo">cruzadinha.exe <span>Restaure o sistema preenchendo os 16 termos</span></div>
+
+              <div class="cw">
+                <div class="cw-tabuleiro-area">
+                  <div id="cw-pista-atual" class="cw-pista-atual">Clique numa casa para começar.</div>
+                  <div id="cw-tabuleiro" class="cw-tabuleiro" aria-label="Tabuleiro da cruzadinha"></div>
+                  <div class="cw-controles">
+                    <button id="cw-conferir" class="btn-pixel" type="button">CONFERIR</button>
+                    <button id="cw-reiniciar" class="btn-pixel secundario" type="button">REINICIAR</button>
+                  </div>
+                  <p id="cw-placar" class="cw-placar" aria-live="polite">0 de 16 palavras</p>
+                </div>
+
+                <div class="cw-pistas">
+                  <div>
+                    <h2>Horizontais</h2>
+                    <ol id="cw-horizontais" class="cw-lista"></ol>
+                  </div>
+                  <div>
+                    <h2>Verticais</h2>
+                    <ol id="cw-verticais" class="cw-lista"></ol>
+                  </div>
+                </div>
+              </div>
+              <p class="atalhos">Teclado: <kbd>setas</kbd> mover · <kbd>Espaço</kbd> trocar direção · <kbd>Tab</kbd> próxima palavra · <kbd>Backspace</kbd> apagar · <kbd>Enter</kbd> conferir</p>
+            </section>
+
+          </div>
+        </div>
+        <div class="monitor-pe" aria-hidden="true"><i></i><b></b></div>
+      </section>
+    </main>
+
+    <!-- Barra inferior de atalhos -->
+    <footer class="dock" aria-label="Atalhos">
+      <button id="btn-cafe" class="dock-btn" type="button">☕ <span>Café</span></button>
+      <button id="btn-musica" class="dock-btn" type="button" aria-pressed="false">♪ <span>Música: OFF</span></button>
+      <button id="btn-clima" class="dock-btn" type="button">☂ <span>Chuva</span></button>
+      <button id="btn-interagir" class="dock-btn" type="button">✋ <span>Interagir</span></button>
+      <button id="btn-sons" class="dock-btn" type="button" aria-pressed="false">🔇 <span>Sons: OFF</span></button>
+      <button id="btn-reset" class="dock-btn perigo" type="button">⟲ <span>Reiniciar partida</span></button>
+    </footer>
+  </div>
+
+  <!-- Janela modal (conquistas / confirmação) -->
+  <div id="modal" class="modal" hidden>
+    <div class="modal-caixa" role="dialog" aria-modal="true" aria-labelledby="modal-titulo">
+      <h2 id="modal-titulo"></h2>
+      <div id="modal-corpo"></div>
+      <div id="modal-botoes" class="modal-botoes"></div>
+    </div>
+  </div>
+
+  <div id="toasts" class="toasts" aria-live="polite"></div>
+
+  <script src="game.js"></script>
+  <script src="crossword.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
