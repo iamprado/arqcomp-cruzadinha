@@ -4,7 +4,7 @@ Jogo educativo de **Arquitetura Computacional** com estética retrô em pixel ar
 Num quartinho aconchegante à noite, um personagem estuda no computador ao lado de um gatinho dormindo.
 O monitor tem dois aplicativos: **Flashcards**, para memorizar os conceitos, e **Cruzadinha**, para colocá-los à prova.
 
-🔗 **Jogue aqui:** https://SEU-USUARIO.github.io/arqcomp-cruzadinha/
+🔗 **Jogue aqui:** https://iamprado.github.io/arqcomp-cruzadinha/
 
 ## Tecnologias
 
@@ -102,5 +102,5 @@ Não precisa de instalação nem de servidor backend.
 1. Crie um repositório **público** chamado `arqcomp-cruzadinha` e envie os arquivos para a branch `main`, com o `index.html` na raiz.
 2. No repositório, abra **Settings → Pages**.
 3. Em **Source**, escolha **Deploy from a branch**, selecione a branch **main** e a pasta **/ (root)** e clique em **Save**.
-4. Depois de alguns minutos, o site fica no ar em `https://SEU-USUARIO.github.io/arqcomp-cruzadinha/`.
+4. Depois de alguns minutos, o site fica no ar em `https://iamprado.github.io/arqcomp-cruzadinha/`.
 5. Teste o link numa janela anônima do navegador.
