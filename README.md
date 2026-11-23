@@ -41,7 +41,7 @@ O monitor tem dois aplicativos: **Flashcards**, para memorizar os conceitos, e *
 - O personagem digita enquanto você escreve, comemora quando você acerta, fica pensativo quando erra e de vez em quando toma um café.
 - Clique no **gatinho** para acordá-lo e no **personagem** para ele falar com você.
 - Barra inferior: ☕ café · ♪ música lo-fi · ☂/✦ chuva ou noite estrelada · ✋ interagir · 🔇 sons · ⟲ reiniciar a partida.
-- Música e sons começam **desligados**.
+- Música e efeitos sonoros começam **ligados** ao clicar em START (dá para desligar na barra inferior).
 - Conquistas: Primeiro acerto, Cinco respostas corretas, Mestre das memórias, Sistema restaurado, Memória fotográfica, Amigo felino e Movido a café.
 
 ## Palavras e pistas da cruzadinha
